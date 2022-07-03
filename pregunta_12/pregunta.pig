@@ -27,3 +27,18 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+datos = LOAD 'data.csv' USING PigStorage(',')
+   AS (
+        id:int,
+        name:chararray,
+        lastname:chararray,
+        date:chararray,
+        color:chararray,
+        value:int
+   );
+
+resultado = FOREACH datos GENERATE lastname;
+
+selection = FILTER resultado BY ($0 matches '.*D.*' or $0 matches '.*E.*' or $0 matches '.*F.*' or $>
+
+STORE selection INTO 'output';
