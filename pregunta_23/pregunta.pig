@@ -22,3 +22,20 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+datos = LOAD 'data.csv' USING PigStorage(',')
+   AS (
+        id:int,
+        name:chararray,
+        lastname:chararray,
+        date:chararray,
+        color:chararray,
+        value:int
+   );
+
+resultado = FOREACH datos GENERATE name,color;
+
+selection = FILTER resultado BY ($1 matches '.*a' or $1 matches '.*e' or $1 matches '.*i' or $1 matches '.*o' or $1 matches '.*u');
+
+
+STORE selection INTO 'output' USING PigStorage(',');
+

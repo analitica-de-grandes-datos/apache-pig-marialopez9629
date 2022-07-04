@@ -21,3 +21,19 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+datos = LOAD 'data.csv' USING PigStorage(',')
+   AS (
+        id:int,
+        name:chararray,
+        lastname:chararray,
+        date:chararray,
+        color:chararray,
+        value:int
+   );
+
+resultado = FOREACH datos GENERATE name;
+
+selection = FILTER resultado BY ($0 matches '(M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z).*');
+
+STORE selection INTO 'output';
+

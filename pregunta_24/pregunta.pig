@@ -18,5 +18,21 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+datos = LOAD 'data.csv' USING PigStorage(',')
+   AS (
+        id:int,
+        name:chararray,
+        lastname:chararray,
+        date:chararray,
+        color:chararray,
+        value:int
+   );
 
+resultado = FOREACH datos GENERATE date;
+
+selection = FOREACH resultado GENERATE FLATTEN(STRSPLIT($0,'-',3));
+
+month = FOREACH selection GENERATE $1;
+
+STORE month INTO 'output' USING PigStorage(',');
 
