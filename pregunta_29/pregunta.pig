@@ -46,7 +46,7 @@ datos = LOAD 'data.csv' USING PigStorage(',')
 
 resultado = FOREACH datos GENERATE date,FLATTEN(STRSPLIT(date,'-',3));
 
-resultado2 = FOREACH resultado GENERATE $0,LOWER(ToString($0,'MMM')),$2,REGEX_EXTRACT($2,'0*(\\d+)?'>
+resultado2 = FOREACH resultado GENERATE $0,LOWER(ToString($0,'MMM')),$2,REGEX_EXTRACT($2,'0*(\\d+)?', 1);
 
 resultado3 = FOREACH resultado2 GENERATE $0,REPLACE($1,'apr','abr'),$2,$3;
 
@@ -57,5 +57,7 @@ resultado5 = FOREACH resultado4 GENERATE $0,REPLACE($1,'aug','ago'),$2,$3;
 resultado6 = FOREACH resultado5 GENERATE $0,REPLACE($1,'dec','dic'),$2,$3;
 
 STORE resultado6 INTO 'output' USING PigStorage(',');
+
+
 
 
