@@ -34,7 +34,8 @@ datos = LOAD 'data.csv' USING PigStorage(',')
 
 resultado = FOREACH datos GENERATE name,color;
 
-selection = FILTER resultado BY ($1 matches '.*a' or $1 matches '.*e' or $1 matches '.*i' or $1 matc>
+selection = FILTER resultado BY ($1 matches '.*a' or $1 matches '.*e' or $1 matches '.*i' or $1 matches '.*o' or $1 matches '.*u');
+
 
 STORE selection INTO 'output' USING PigStorage(',');
 
