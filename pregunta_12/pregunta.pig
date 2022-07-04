@@ -39,6 +39,6 @@ datos = LOAD 'data.csv' USING PigStorage(',')
 
 resultado = FOREACH datos GENERATE lastname;
 
-selection = FILTER resultado BY ($0 matches '.*D.*' or $0 matches '.*E.*' or $0 matches '.*F.*' or $>
+selection = FILTER resultado BY ($0 matches '.*D.*' or $0 matches '.*E.*' or $0 matches '.*F.*' or $0 matches '.*G.*' or $0 matches '.*H.*' or $0 matches '.*I.*' or $0 matches '.*J.*' or $0 matches '.*K.*');
 
 STORE selection INTO 'output';
