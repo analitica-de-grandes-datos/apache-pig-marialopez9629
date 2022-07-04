@@ -32,7 +32,7 @@ datos = LOAD 'data.csv' USING PigStorage(',')
 
 resultado = FOREACH datos GENERATE name,color;
 
-selection = FILTER resultado BY NOT ($0 matches '.*b.*');
+selection = FILTER resultado BY NOT ($1 matches '.*b.*');
 
 STORE selection INTO 'output' USING PigStorage(',');
 
